@@ -6,7 +6,7 @@ import numpy as np
 
 data = np.loadtxt('./data.csv', delimiter=',',
                   unpack=True, dtype='float32')
-
+#uppack = True  는 np.transpose 처럼 Transpose 행렬로 바꾸어준다.
 # 털, 날개, 기타, 포유류, 조류
 # x_data = 0, 1
 # y_data = 2, 3, 4
@@ -19,7 +19,7 @@ y_data = np.transpose(data[2:])
 ######
 # 학습에 직접적으로 사용하지 않고 학습 횟수에 따라 단순히 증가시킬 변수를 만듭니다.
 global_step = tf.Variable(0, trainable=False, name='global_step')
-
+# 편향 없이 가중치만 사용한 모델, 계층 하나 증가
 X = tf.placeholder(tf.float32)
 Y = tf.placeholder(tf.float32)
 
