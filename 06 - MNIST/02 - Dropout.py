@@ -53,7 +53,7 @@ for epoch in range(30):
 
     print('Epoch:', '%04d' % (epoch + 1),
           'Avg. cost =', '{:.3f}'.format(total_cost / total_batch))
-
+/
 print('최적화 완료!')
 
 #########

@@ -20,6 +20,7 @@ Y = tf.placeholder(tf.float32, [None, 10])
 # 784(입력 특성값)
 #   -> 256 (히든레이어 뉴런 갯수) -> 256 (히든레이어 뉴런 갯수)
 #   -> 10 (결과값 0~9 분류)
+# tf.random_normal([row, col] , stddev = 0.01) -> 표준편차가 0.01인 정규분포를 가지는  행렬을 생성
 W1 = tf.Variable(tf.random_normal([784, 256], stddev=0.01))
 # 입력값에 가중치를 곱하고 ReLU 함수를 이용하여 레이어를 만듭니다.
 L1 = tf.nn.relu(tf.matmul(X, W1))
@@ -32,6 +33,7 @@ W3 = tf.Variable(tf.random_normal([256, 10], stddev=0.01))
 # 최종 모델의 출력값은 W3 변수를 곱해 10개의 분류를 가지게 됩니다.
 model = tf.matmul(L2, W3)
 
+
 cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(logits=model, labels=Y))
 optimizer = tf.train.AdamOptimizer(0.001).minimize(cost)
 
@@ -42,20 +44,23 @@ init = tf.global_variables_initializer()
 sess = tf.Session()
 sess.run(init)
 
+# MNIST 데이터의 양이 너무 큼으로 적당한 사이즈로 잘라서 사용하는 MiniBatch 방법을 사용합니다.
 batch_size = 100
 total_batch = int(mnist.train.num_examples / batch_size)
 
 for epoch in range(15):
     total_cost = 0
 
+    # print(sess.run(model, feed_dict = {X: mnist.test.images, Y: mnist.test.labels})[0])
     for i in range(total_batch):
         # 텐서플로우의 mnist 모델의 next_batch 함수를 이용해
         # 지정한 크기만큼 학습할 데이터를 가져옵니다.
         batch_xs, batch_ys = mnist.train.next_batch(batch_size)
-
+        # sess.run 을 통해 최적화 시키고 손실값을 가져와서 cost_val에 저자
         _, cost_val = sess.run([optimizer, cost], feed_dict={X: batch_xs, Y: batch_ys})
-        total_cost += cost_val
 
+        total_cost += cost_val
+    # 한 세대의 학습이 끝난 결과를 출력
     print('Epoch:', '%04d' % (epoch + 1),
           'Avg. cost =', '{:.3f}'.format(total_cost / total_batch))
 
