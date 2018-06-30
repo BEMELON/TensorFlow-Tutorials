@@ -1,4 +1,6 @@
 # 대표적인 비지도(Unsupervised) 학습 방법인 Autoencoder 를 구현해봅니다.
+# 비지도 학습은, 입력값으로부터 데이터의 특징을 찾아내는 학습방법 입니다.
+# 가장널리 쓰이는 신경망으로 Autoencoder가 있습니다.
 import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
