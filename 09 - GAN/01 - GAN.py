@@ -69,7 +69,9 @@ def get_noise(batch_size, n_noise):
 # 노이즈를 이용해 랜덤한 이미지를 생성합니다.
 G = generator(Z)
 # 노이즈를 이용해 생성한 이미지가 진짜 이미지인지 판별한 값을 구합니다.
+# D_gene은 가짜 이미지 판별값으로 0에 가깝게 만들어야 됩니다.
 D_gene = discriminator(G)
+# D_real은 진짜 이미지 판별값으로 1에 가까워야 합니다.
 # 진짜 이미지를 이용해 판별한 값을 구합니다.
 D_real = discriminator(X)
 
