@@ -1,4 +1,9 @@
 # 머신러닝 학습의 Hello World 와 같은 MNIST(손글씨 숫자 인식) 문제를 신경망으로 풀어봅니다.
+# RNN(Recurrent Neural Network)[순환 신경망] 자연어 처리나, 음성 인식처럼
+# 순서가 있는 데이터를 처리하는데 강점을 가진 신경망입니다.
+# 긴 단계의 데이터를 학습할 때 맨 뒤에서는 맨 앞의 정보를 잘 기억하지 못하는
+# 특성이 있고, 그를 보완하기 위해 LSTM(Long Short-Term Memory),
+# GRU(Gated Recurrent Units) 등등 많은 신경망이 만들어졌습니다.
 import tensorflow as tf
 
 from tensorflow.examples.tutorials.mnist import input_data
